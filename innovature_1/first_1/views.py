@@ -1,13 +1,15 @@
 from .models import BooksList
 from .serializers import BookSerializer
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def books_list(request):
 
     if request.method == 'GET':
@@ -23,3 +25,5 @@ def books_list(request):
             return Response(serializer.data)
         else:
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+#innovature , innovature123
